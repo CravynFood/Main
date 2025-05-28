@@ -246,11 +246,9 @@ metadata:
 
 test_plan:
   current_focus:
-    - "Gemini LLM Integration for Recipe Generation"
     - "Gemini Image Generation Integration"
-    - "Recipe CRUD API Endpoints"
-    - "MongoDB Recipe Storage"
-  stuck_tasks: []
+  stuck_tasks:
+    - "Gemini Image Generation Integration"
   test_all: false
   test_priority: "high_first"
 
