@@ -165,10 +165,9 @@ async def generate_recipe_image(recipe_id: str):
         # Initialize Gemini image generator
         image_gen = GeminiImageGeneration(api_key=GEMINI_API_KEY)
         
-        # Generate image
+        # Generate image - try with default model first
         images = await image_gen.generate_images(
             prompt=prompt,
-            model="imagen-3.0-generate-002",
             number_of_images=1
         )
 
