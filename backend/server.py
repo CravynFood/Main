@@ -157,41 +157,57 @@ async def generate_recipe_image(recipe_id: str):
         if not recipe_data:
             raise HTTPException(status_code=404, detail="Recipe not found")
         
-        # Create prompt for image generation
-        recipe_title = recipe_data.get("title", "Delicious dish")
-        cuisine = recipe_data.get("cuisine", "")
-        prompt = f"A beautifully plated {recipe_title}, {cuisine} cuisine, professional food photography, appetizing, vibrant colors, restaurant quality presentation"
+        try:
+            # Create prompt for image generation
+            recipe_title = recipe_data.get("title", "Delicious dish")
+            cuisine = recipe_data.get("cuisine", "")
+            prompt = f"A beautifully plated {recipe_title}, {cuisine} cuisine, professional food photography, appetizing, vibrant colors, restaurant quality presentation"
 
-        # Initialize Gemini image generator
-        image_gen = GeminiImageGeneration(api_key=GEMINI_API_KEY)
-        
-        # Generate image - try with default model first
-        images = await image_gen.generate_images(
-            prompt=prompt,
-            number_of_images=1
-        )
-
-        # Convert image to base64
-        if images and len(images) > 0:
-            image_base64 = base64.b64encode(images[0]).decode('utf-8')
+            # Initialize Gemini image generator
+            image_gen = GeminiImageGeneration(api_key=GEMINI_API_KEY)
             
-            # Update recipe with image
-            await db.recipes.update_one(
-                {"id": recipe_id},
-                {"$set": {"image_base64": image_base64}}
+            # Generate image - try with default model first
+            images = await image_gen.generate_images(
+                prompt=prompt,
+                number_of_images=1
             )
-            
-            # Save generated image
-            generated_image = GeneratedImage(
-                recipe_id=recipe_id,
-                image_base64=image_base64
-            )
-            await db.generated_images.insert_one(generated_image.dict())
-            
-            return {"image_base64": image_base64}
-        else:
-            raise HTTPException(status_code=500, detail="No image was generated")
 
+            # Convert image to base64
+            if images and len(images) > 0:
+                image_base64 = base64.b64encode(images[0]).decode('utf-8')
+                
+                # Update recipe with image
+                await db.recipes.update_one(
+                    {"id": recipe_id},
+                    {"$set": {"image_base64": image_base64}}
+                )
+                
+                # Save generated image
+                generated_image = GeneratedImage(
+                    recipe_id=recipe_id,
+                    image_base64=image_base64
+                )
+                await db.generated_images.insert_one(generated_image.dict())
+                
+                return {"image_base64": image_base64}
+            else:
+                raise HTTPException(status_code=500, detail="No image was generated")
+                
+        except Exception as image_error:
+            # If image generation fails (e.g., billing required), provide a fallback
+            error_msg = str(image_error)
+            if "billed users" in error_msg or "billing" in error_msg.lower():
+                # Use a placeholder image or return helpful message
+                return {
+                    "message": "Image generation requires a Google Cloud billing account. You can enable billing at https://console.cloud.google.com/billing",
+                    "image_base64": None,
+                    "error_type": "billing_required"
+                }
+            else:
+                raise HTTPException(status_code=500, detail=f"Image generation failed: {error_msg}")
+
+    except HTTPException:
+        raise
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Failed to generate image: {str(e)}")
 
