@@ -128,7 +128,7 @@ function App() {
             🍳 <span className="text-orange-600">Cravyn</span>
           </h1>
           <p className="text-gray-600 text-center mt-2 text-lg">
-            Turn your ingredients into amazing recipes with AI
+            Cook What You Crave
           </p>
         </div>
       </header>
