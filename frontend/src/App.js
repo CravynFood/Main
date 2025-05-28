@@ -82,13 +82,22 @@ function App() {
     setIsGeneratingImage(true);
     try {
       const response = await axios.post(`${API}/recipes/${currentRecipe.id}/generate-image`);
-      setCurrentRecipe({
-        ...currentRecipe,
-        image_base64: response.data.image_base64
-      });
+      
+      if (response.data.error_type === "billing_required") {
+        alert(`Image generation requires Google Cloud billing account.\n\nTo enable image generation:\n1. Visit https://console.cloud.google.com/billing\n2. Set up billing for your Google Cloud project\n3. Ensure your API key has image generation permissions`);
+      } else if (response.data.image_base64) {
+        setCurrentRecipe({
+          ...currentRecipe,
+          image_base64: response.data.image_base64
+        });
+      }
     } catch (e) {
       console.error("Failed to generate image", e);
-      alert("Failed to generate recipe image. Please try again!");
+      if (e.response?.data?.detail?.includes("billed users")) {
+        alert("Image generation requires a Google Cloud billing account. Please set up billing in Google Cloud Console to use this feature.");
+      } else {
+        alert("Failed to generate recipe image. Please try again!");
+      }
     }
     setIsGeneratingImage(false);
   };
