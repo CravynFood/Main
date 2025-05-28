@@ -111,23 +111,29 @@ backend:
     file: "server.py"
     stuck_count: 0
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: true
         agent: "main"
         comment: "Implemented Gemini chat integration using emergentintegrations library for recipe generation with proper JSON parsing"
+      - working: true
+        agent: "testing"
+        comment: "Tested recipe generation with basic ingredients, dietary preferences, and cuisine preferences. All tests passed successfully. The API returns well-structured JSON responses with all required fields (title, description, ingredients, instructions, timing)."
 
   - task: "Gemini Image Generation Integration"
     implemented: true
-    working: true  
+    working: false  
     file: "server.py"
-    stuck_count: 0
+    stuck_count: 1
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: true
         agent: "main"
         comment: "Implemented Gemini image generation using imagen-3.0-generate-002 model with base64 encoding"
+      - working: false
+        agent: "testing"
+        comment: "Image generation endpoint returns 500 Internal Server Error. Server logs show a 400 Bad Request error when calling the Gemini imagen-3.0-generate-002 API. The request format may be incorrect or there might be an issue with the API key permissions for image generation."
 
   - task: "Recipe CRUD API Endpoints"
     implemented: true
@@ -135,11 +141,14 @@ backend:
     file: "server.py"
     stuck_count: 0
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: true
         agent: "main"
         comment: "Created endpoints for generating recipes, fetching recipes, getting specific recipe, and surprise me functionality"
+      - working: true
+        agent: "testing"
+        comment: "Tested all CRUD endpoints: GET /api/recipes, GET /api/recipes/{id}, POST /api/recipes/generate, and GET /api/surprise-me. All endpoints return correct responses with appropriate status codes and JSON formatting."
 
   - task: "MongoDB Recipe Storage"
     implemented: true
@@ -147,11 +156,14 @@ backend:
     file: "server.py"
     stuck_count: 0
     priority: "medium"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: true
         agent: "main"
         comment: "Implemented MongoDB collections for recipes and generated images with proper data models"
+      - working: true
+        agent: "testing"
+        comment: "Verified MongoDB storage by generating recipes and then retrieving them. Data persistence is working correctly with proper UUID generation and all recipe data is stored and retrieved successfully."
 
 frontend:
   - task: "Ingredient Input Interface"
