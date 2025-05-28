@@ -257,3 +257,5 @@ test_plan:
 agent_communication:
   - agent: "main"
     message: "Completed initial implementation of Cravyn MVP with Gemini integration for both recipe generation and image creation. All core features implemented including ingredient selection, dietary filters, recipe generation, image generation, and recipe history. Ready for backend testing to verify Gemini integrations and API endpoints."
+  - agent: "testing"
+    message: "Completed backend testing. Recipe generation, CRUD operations, and MongoDB storage are working correctly. However, the image generation endpoint is failing with a 500 Internal Server Error. The server logs show a 400 Bad Request error when calling the Gemini imagen-3.0-generate-002 API. The request format may be incorrect or there might be an issue with the API key permissions for image generation. Please check the implementation of the image generation endpoint."
