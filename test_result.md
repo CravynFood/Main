@@ -188,7 +188,7 @@ frontend:
     status_history:
       - working: true
         agent: "main"
-        comment: "Built recipe generation interface with dietary preferences and cuisine filters"
+        comment: "Built recipe generation interface with dietary preferences and cuisine filters including comprehensive African cuisines (54 African countries/regions)"
 
   - task: "Recipe Display Component"
     implemented: true
