@@ -380,7 +380,7 @@ function App() {
                     <button
                       key={index}
                       onClick={() => setCurrentRecipe(recipe)}
-                      className="w-full text-left p-3 bg-gray-50 rounded-lg hover:bg-orange-50 transition-colors border border-gray-200"
+                      className="w-full text-left p-3 bg-gray-50 rounded-lg hover:bg-pink-50 transition-colors border border-gray-200"
                     >
                       <h4 className="font-medium text-gray-800">{recipe.title}</h4>
                       <p className="text-sm text-gray-600">{recipe.cuisine} • {recipe.prep_time}</p>
