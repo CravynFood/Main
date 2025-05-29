@@ -37,6 +37,7 @@ function App() {
   const [isGenerating, setIsGenerating] = useState(false);
   const [isGeneratingImage, setIsGeneratingImage] = useState(false);
   const [showIngredientDropdown, setShowIngredientDropdown] = useState(false);
+  const [historicalIngredients, setHistoricalIngredients] = useState([]);
 
   useEffect(() => {
     fetchRecentRecipes();
