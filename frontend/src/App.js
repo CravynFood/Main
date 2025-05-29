@@ -201,7 +201,7 @@ function App() {
                       className={`px-3 py-1 rounded-full text-sm transition-colors ${
                         selectedIngredients.includes(ingredient)
                           ? 'bg-gray-200 text-gray-500 cursor-not-allowed'
-                          : 'bg-orange-100 text-orange-700 hover:bg-orange-200'
+                          : 'bg-pink-100 text-pink-700 hover:bg-pink-200'
                       }`}
                     >
                       {ingredient}
