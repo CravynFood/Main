@@ -55,6 +55,14 @@ function App() {
   const addIngredient = (ingredient) => {
     if (ingredient && !selectedIngredients.includes(ingredient)) {
       setSelectedIngredients([...selectedIngredients, ingredient]);
+      
+      // Add to historical ingredients if not already present
+      if (!historicalIngredients.includes(ingredient) && !COMMON_INGREDIENTS.includes(ingredient)) {
+        setHistoricalIngredients(prev => {
+          const updated = [ingredient, ...prev.filter(item => item !== ingredient)];
+          return updated.slice(0, 10); // Keep only last 10 unique historical ingredients
+        });
+      }
     }
     setCustomIngredient("");
     setShowIngredientDropdown(false);
