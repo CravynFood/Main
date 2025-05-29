@@ -218,12 +218,12 @@ function App() {
                     {selectedIngredients.map((ingredient, index) => (
                       <span
                         key={index}
-                        className="bg-orange-500 text-white px-3 py-1 rounded-full text-sm flex items-center gap-2"
+                        className="bg-pink-500 text-white px-3 py-1 rounded-full text-sm flex items-center gap-2"
                       >
                         {ingredient}
                         <button
                           onClick={() => removeIngredient(ingredient)}
-                          className="text-orange-200 hover:text-white"
+                          className="text-pink-200 hover:text-white"
                         >
                           ×
                         </button>
