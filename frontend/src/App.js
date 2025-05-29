@@ -244,7 +244,7 @@ function App() {
                   <select
                     value={dietType}
                     onChange={(e) => setDietType(e.target.value)}
-                    className="w-full p-3 border-2 border-gray-300 rounded-lg focus:border-orange-500 focus:outline-none"
+                    className="w-full p-3 border-2 border-gray-300 rounded-lg focus:border-pink-500 focus:outline-none"
                   >
                     {DIET_TYPES.map((diet, index) => (
                       <option key={index} value={diet}>{diet}</option>
@@ -257,7 +257,7 @@ function App() {
                   <select
                     value={cuisine}
                     onChange={(e) => setCuisine(e.target.value)}
-                    className="w-full p-3 border-2 border-gray-300 rounded-lg focus:border-orange-500 focus:outline-none"
+                    className="w-full p-3 border-2 border-gray-300 rounded-lg focus:border-pink-500 focus:outline-none"
                   >
                     {CUISINES.map((c, index) => (
                       <option key={index} value={c}>{c}</option>
