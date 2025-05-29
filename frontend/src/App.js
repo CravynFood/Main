@@ -123,8 +123,24 @@ function App() {
   const surpriseMe = async () => {
     setIsGenerating(true);
     try {
-      const response = await axios.get(`${API}/surprise-me`);
-      setCurrentRecipe(response.data);
+      // Check if we should use preferences or get random recipe
+      if (dietType !== "Any" || cuisine !== "Any") {
+        // Generate recipe based on current preferences with random ingredients
+        const randomIngredients = COMMON_INGREDIENTS
+          .sort(() => Math.random() - 0.5)
+          .slice(0, Math.floor(Math.random() * 4) + 3); // 3-6 random ingredients
+        
+        const response = await axios.post(`${API}/recipes/generate`, {
+          ingredients: randomIngredients,
+          diet_type: dietType !== "Any" ? dietType : null,
+          cuisine: cuisine !== "Any" ? cuisine : null
+        });
+        setCurrentRecipe(response.data);
+      } else {
+        // Get random recipe from database or generate with random ingredients
+        const response = await axios.get(`${API}/surprise-me`);
+        setCurrentRecipe(response.data);
+      }
     } catch (e) {
       console.error("Failed to get surprise recipe", e);
       alert("Failed to get surprise recipe. Please try again!");
