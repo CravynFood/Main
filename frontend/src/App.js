@@ -163,7 +163,7 @@ function App() {
                     setShowIngredientDropdown(true);
                   }}
                   onFocus={() => setShowIngredientDropdown(true)}
-                  className="w-full p-3 border-2 border-gray-300 rounded-lg focus:border-orange-500 focus:outline-none"
+                  className="w-full p-3 border-2 border-gray-300 rounded-lg focus:border-pink-500 focus:outline-none"
                 />
                 
                 {showIngredientDropdown && customIngredient && (
