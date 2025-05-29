@@ -317,19 +317,19 @@ function App() {
                 <p className="text-gray-600 mb-4">{currentRecipe.description}</p>
                 
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6">
-                  <div className="text-center p-2 bg-orange-50 rounded-lg">
+                  <div className="text-center p-2 bg-pink-50 rounded-lg">
                     <p className="text-xs text-gray-600">Prep Time</p>
                     <p className="font-semibold">{currentRecipe.prep_time}</p>
                   </div>
-                  <div className="text-center p-2 bg-orange-50 rounded-lg">
+                  <div className="text-center p-2 bg-pink-50 rounded-lg">
                     <p className="text-xs text-gray-600">Cook Time</p>
                     <p className="font-semibold">{currentRecipe.cook_time}</p>
                   </div>
-                  <div className="text-center p-2 bg-orange-50 rounded-lg">
+                  <div className="text-center p-2 bg-pink-50 rounded-lg">
                     <p className="text-xs text-gray-600">Servings</p>
                     <p className="font-semibold">{currentRecipe.servings}</p>
                   </div>
-                  <div className="text-center p-2 bg-orange-50 rounded-lg">
+                  <div className="text-center p-2 bg-pink-50 rounded-lg">
                     <p className="text-xs text-gray-600">Cuisine</p>
                     <p className="font-semibold">{currentRecipe.cuisine}</p>
                   </div>
