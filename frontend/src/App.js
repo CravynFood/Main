@@ -272,7 +272,7 @@ function App() {
               <button
                 onClick={generateRecipe}
                 disabled={isGenerating || selectedIngredients.length === 0}
-                className="flex-1 bg-orange-600 text-white py-4 rounded-xl font-semibold text-lg hover:bg-orange-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors shadow-lg"
+                className="flex-1 bg-pink-600 text-white py-4 rounded-xl font-semibold text-lg hover:bg-pink-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors shadow-lg"
               >
                 {isGenerating ? "🤖 Generating..." : "🍽️ Generate Recipe"}
               </button>
@@ -280,7 +280,7 @@ function App() {
               <button
                 onClick={surpriseMe}
                 disabled={isGenerating}
-                className="bg-purple-600 text-white px-6 py-4 rounded-xl font-semibold hover:bg-purple-700 disabled:bg-gray-400 transition-colors shadow-lg"
+                className="bg-rose-600 text-white px-6 py-4 rounded-xl font-semibold hover:bg-rose-700 disabled:bg-gray-400 transition-colors shadow-lg"
               >
                 🎲 Surprise Me!
               </button>
