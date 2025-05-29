@@ -16,7 +16,16 @@ const COMMON_INGREDIENTS = [
 ];
 
 const DIET_TYPES = ["Any", "Vegetarian", "Vegan", "Keto", "Gluten-Free", "Paleo", "Low-Carb"];
-const CUISINES = ["Any", "Italian", "Mexican", "Asian", "Indian", "Mediterranean", "American", "French", "Thai", "Japanese"];
+const CUISINES = [
+  "Any", "Italian", "Mexican", "Asian", "Indian", "Mediterranean", "American", "French", "Thai", "Japanese",
+  // African Cuisines
+  "Ethiopian", "Moroccan", "Nigerian", "South African", "Kenyan", "Ghanaian", "Egyptian", "Tunisian", 
+  "Senegalese", "Congolese", "Sudanese", "Tanzanian", "Ugandan", "Rwandan", "Ivorian", "Malian", 
+  "Cameroonian", "Zimbabwean", "Zambian", "Botswanan", "Namibian", "Algerian", "Libyan", "Somalian", 
+  "Eritrean", "Central African", "Gabonese", "Chad", "Niger", "Burkina Faso", "Benin", "Togo", 
+  "Sierra Leone", "Guinea", "Liberian", "Cape Verdean", "Mauritanian", "Gambian", "Burundian", 
+  "Comorian", "Seychellois", "Mauritian", "Malagasy", "Lesotho", "Eswatini"
+];
 
 function App() {
   const [selectedIngredients, setSelectedIngredients] = useState([]);
