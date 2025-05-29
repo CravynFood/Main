@@ -340,7 +340,7 @@ function App() {
                   <ul className="space-y-2">
                     {currentRecipe.ingredients.map((ingredient, index) => (
                       <li key={index} className="flex items-center gap-2">
-                        <span className="text-orange-500">•</span>
+                        <span className="text-pink-500">•</span>
                         {ingredient}
                       </li>
                     ))}
@@ -352,7 +352,7 @@ function App() {
                   <ol className="space-y-3">
                     {currentRecipe.instructions.map((instruction, index) => (
                       <li key={index} className="flex gap-3">
-                        <span className="bg-orange-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-semibold flex-shrink-0 mt-0.5">
+                        <span className="bg-pink-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-semibold flex-shrink-0 mt-0.5">
                           {index + 1}
                         </span>
                         <span>{instruction}</span>
