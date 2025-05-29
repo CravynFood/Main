@@ -227,7 +227,11 @@ function App() {
               <div className="mb-4">
                 <p className="text-sm text-gray-600 mb-2">Quick add popular ingredients:</p>
                 <div className="flex flex-wrap gap-2">
-                  {COMMON_INGREDIENTS.slice(0, 8).map((ingredient, index) => (
+                  {/* Show historical ingredients first, then fill with common ingredients */}
+                  {[...historicalIngredients, ...COMMON_INGREDIENTS]
+                    .filter((ingredient, index, arr) => arr.indexOf(ingredient) === index) // Remove duplicates
+                    .slice(0, 10) // Limit to 10 total
+                    .map((ingredient, index) => (
                     <button
                       key={index}
                       onClick={() => addIngredient(ingredient)}
@@ -235,10 +239,12 @@ function App() {
                       className={`px-3 py-1 rounded-full text-sm transition-colors ${
                         selectedIngredients.includes(ingredient)
                           ? 'bg-gray-200 text-gray-500 cursor-not-allowed'
+                          : historicalIngredients.includes(ingredient)
+                          ? 'bg-purple-100 text-purple-700 hover:bg-purple-200 border border-purple-300'
                           : 'bg-pink-100 text-pink-700 hover:bg-pink-200'
                       }`}
                     >
-                      {ingredient}
+                      {historicalIngredients.includes(ingredient) ? `✨ ${ingredient}` : ingredient}
                     </button>
                   ))}
                 </div>
