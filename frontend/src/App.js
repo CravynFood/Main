@@ -172,7 +172,7 @@ function App() {
                       <button
                         key={index}
                         onClick={() => addIngredient(ingredient)}
-                        className="w-full text-left px-4 py-2 hover:bg-orange-50 border-b border-gray-100 last:border-b-0"
+                        className="w-full text-left px-4 py-2 hover:bg-pink-50 border-b border-gray-100 last:border-b-0"
                       >
                         {ingredient}
                       </button>
@@ -180,7 +180,7 @@ function App() {
                     {customIngredient && !COMMON_INGREDIENTS.includes(customIngredient.toLowerCase()) && (
                       <button
                         onClick={() => addIngredient(customIngredient)}
-                        className="w-full text-left px-4 py-2 hover:bg-orange-50 font-medium text-orange-600"
+                        className="w-full text-left px-4 py-2 hover:bg-pink-50 font-medium text-pink-600"
                       >
                         Add "{customIngredient}"
                       </button>
