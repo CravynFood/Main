@@ -137,7 +137,7 @@ function App() {
             🍳 <span className="text-pink-600">Cravyn</span>
           </h1>
           <p className="text-gray-600 text-center mt-2 text-lg">
-            Cook What You Crave
+            Eat what you crave
           </p>
         </div>
       </header>
