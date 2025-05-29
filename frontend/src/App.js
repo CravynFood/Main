@@ -122,10 +122,10 @@ function App() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-pink-50 via-peach-50 to-rose-50">
       {/* Header */}
-      <header className="bg-white shadow-lg border-b-4 border-orange-500">
+      <header className="bg-white shadow-lg border-b-4 border-pink-500">
         <div className="max-w-7xl mx-auto px-4 py-6">
           <h1 className="text-4xl font-bold text-gray-800 text-center">
-            🍳 <span className="text-orange-600">Cravyn</span>
+            🍳 <span className="text-pink-600">Cravyn</span>
           </h1>
           <p className="text-gray-600 text-center mt-2 text-lg">
             Cook What You Crave
