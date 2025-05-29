@@ -48,12 +48,12 @@
 }
 
 .overflow-y-auto::-webkit-scrollbar-thumb {
-  background: #fb923c;
+  background: #ec4899;
   border-radius: 2px;
 }
 
 .overflow-y-auto::-webkit-scrollbar-thumb:hover {
-  background: #ea580c;
+  background: #db2777;
 }
 
 /* Animation for generating states */
