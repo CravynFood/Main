@@ -1,0 +1,92 @@
+name: Deploy Cravyn to Google Cloud
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+env:
+  PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
+  REGION: us-central1
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+    
+    - name: Setup Google Cloud
+      uses: google-github-actions/setup-gcloud@v1
+      with:
+        service_account_key: ${{ secrets.GCP_SA_KEY }}
+        project_id: ${{ env.PROJECT_ID }}
+        export_default_credentials: true
+    
+    - name: Configure Docker
+      run: gcloud auth configure-docker
+    
+    - name: Build and Push Backend
+      run: |
+        cd backend
+        docker build -f ../deployment/backend.Dockerfile -t gcr.io/$PROJECT_ID/cravyn-backend:$GITHUB_SHA .
+        docker push gcr.io/$PROJECT_ID/cravyn-backend:$GITHUB_SHA
+    
+    - name: Build and Push Frontend
+      run: |
+        cd frontend
+        docker build -f ../deployment/frontend.Dockerfile -t gcr.io/$PROJECT_ID/cravyn-frontend:$GITHUB_SHA .
+        docker push gcr.io/$PROJECT_ID/cravyn-frontend:$GITHUB_SHA
+    
+    - name: Deploy Backend to Cloud Run
+      run: |
+        gcloud run deploy cravyn-backend \
+          --image gcr.io/$PROJECT_ID/cravyn-backend:$GITHUB_SHA \
+          --platform managed \
+          --region $REGION \
+          --allow-unauthenticated \
+          --set-env-vars MONGO_URL="${{ secrets.MONGO_URL }}" \
+          --set-env-vars DB_NAME="cravyn_db" \
+          --set-env-vars GEMINI_API_KEY="${{ secrets.GEMINI_API_KEY }}" \
+          --port 8001 \
+          --memory 1Gi \
+          --cpu 1 \
+          --min-instances 1 \
+          --max-instances 10
+    
+    - name: Get Backend URL
+      id: backend
+      run: |
+        BACKEND_URL=$(gcloud run services describe cravyn-backend --platform managed --region $REGION --format 'value(status.url)')
+        echo "url=$BACKEND_URL" >> $GITHUB_OUTPUT
+    
+    - name: Deploy Frontend to Cloud Run
+      run: |
+        gcloud run deploy cravyn-frontend \
+          --image gcr.io/$PROJECT_ID/cravyn-frontend:$GITHUB_SHA \
+          --platform managed \
+          --region $REGION \
+          --allow-unauthenticated \
+          --set-env-vars REACT_APP_BACKEND_URL="${{ steps.backend.outputs.url }}" \
+          --port 3000 \
+          --memory 512Mi \
+          --cpu 1 \
+          --min-instances 1 \
+          --max-instances 5
+    
+    - name: Get Frontend URL
+      id: frontend
+      run: |
+        FRONTEND_URL=$(gcloud run services describe cravyn-frontend --platform managed --region $REGION --format 'value(status.url)')
+        echo "url=$FRONTEND_URL" >> $GITHUB_OUTPUT
+    
+    - name: Test Deployment
+      run: |
+        echo "Testing backend..."
+        curl -f "${{ steps.backend.outputs.url }}/api/" || exit 1
+        echo "Testing frontend..."
+        curl -f "${{ steps.frontend.outputs.url }}/" || exit 1
+        echo "🎉 Deployment successful!"
+        echo "Frontend: ${{ steps.frontend.outputs.url }}"
+        echo "Backend: ${{ steps.backend.outputs.url }}"
