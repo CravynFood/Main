@@ -1,0 +1,17 @@
+/* Custom peach colors */
+.bg-peach-50 {
+  background-color: #fef7f3;
+}
+
+.from-pink-50 {
+  --tw-gradient-from: #fdf2f8;
+}
+
+.via-peach-50 {
+  --tw-gradient-to: rgb(254 247 243 / 0);
+  --tw-gradient-stops: var(--tw-gradient-from), #fef7f3, var(--tw-gradient-to);
+}
+
+.to-rose-50 {
+  --tw-gradient-to: #fff1f2;
+}
