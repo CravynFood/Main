@@ -27,17 +27,17 @@ jobs:
     - name: Configure Docker
       run: gcloud auth configure-docker
     
-    - name: Build and Push Backend
-      run: |
-        cd backend
-        docker build -f ../deployment/backend.Dockerfile -t gcr.io/$PROJECT_ID/cravyn-backend:$GITHUB_SHA .
-        docker push gcr.io/$PROJECT_ID/cravyn-backend:$GITHUB_SHA
-    
     - name: Build and Push Frontend
       run: |
         cd frontend
         docker build -f ../deployment/frontend.Dockerfile -t gcr.io/$PROJECT_ID/cravyn-frontend:$GITHUB_SHA .
         docker push gcr.io/$PROJECT_ID/cravyn-frontend:$GITHUB_SHA
+
+    - name: Build and Push Backend
+      run: |
+        cd backend
+        docker build -f ../deployment/backend.Dockerfile -t gcr.io/$PROJECT_ID/cravyn-backend:$GITHUB_SHA .
+        docker push gcr.io/$PROJECT_ID/cravyn-backend:$GITHUB_SHA
     
     - name: Deploy Backend to Cloud Run
       run: |
