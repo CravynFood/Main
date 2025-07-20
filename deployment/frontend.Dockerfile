@@ -21,13 +21,13 @@ WORKDIR /app
 RUN npm install -g serve@14.2.4
 
 # Create non-root user
-RUN addgroup -g 1000 cravyn && adduser -u 1000 -G cravyn -s /bin/sh -D cravyn
+# RUN addgroup -g 1000 cravyn && adduser -u 1000 -G cravyn -s /bin/sh -D cravyn
 
 # Copy built app
 COPY --from=builder /app/build ./build
-RUN chown -R cravyn:cravyn /app
+# RUN chown -R cravyn:cravyn /app
 
-USER cravyn
+# USER cravyn
 
 # Expose port
 EXPOSE 3000
