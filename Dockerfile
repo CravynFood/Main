@@ -10,6 +10,11 @@ RUN echo "${FRONTEND_ENV}" | tr ',' '\n' > /app/.env
 RUN cat /app/.env
 RUN yarn install --frozen-lockfile && yarn build
 
+# ...existing code...
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+# ...existing code...
+
 # Stage 2: Install Python Backend
 FROM python:3.11-slim as backend
 WORKDIR /app
