@@ -13,6 +13,19 @@ RUN yarn install --frozen-lockfile && yarn build
 # Install Python and pip
 RUN apt-get update && apt-get install -y python3 python3-pip
 
+# Set the working directory in the container
+WORKDIR /usr/src/app
+
+# Copy package.json and package-lock.json
+COPY package*.json ./
+
+# Install any needed packages
+RUN npm install
+
+# Bundle app source
+COPY . .
+
+# Copy requirements.txt
 COPY requirements.txt .
 RUN pip3 install --no-cache-dir -r requirements.txt
 # ...existing code...
@@ -22,7 +35,7 @@ FROM python:3.11-slim as backend
 WORKDIR /app
 COPY backend/ /app/
 RUN rm /app/.env
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip3 install --no-cache-dir -r requirements.txt
 
 # Stage 3: Final Image
 FROM nginx:stable-alpine
