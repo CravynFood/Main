@@ -1,9 +1,9 @@
 # Environment Variables for Google Cloud Deployment
 
 # Required for deployment
-export PROJECT_ID="your-gcp-project-id"
-export GEMINI_API_KEY="your-gemini-api-key-from-ai-studio"
-export MONGO_URL="your-mongodb-connection-string"
+export PROJECT_ID="gen-lang-client-0453265038"
+export GEMINI_API_KEY="AIzaSyCA_y4nHkb9FApH_yLKSLXYl9OOD3ztShk"
+export MONGO_URL="mongodb+srv://softwares:<sweQ2U3QzJXmZgo6>@production.ukwjfkq.mongodb.net/?retryWrites=true&w=majority&appName=Production"
 
 # Optional configurations
 export REGION="us-central1"
@@ -12,7 +12,7 @@ export FRONTEND_IMAGE="cravyn-frontend"
 export DB_NAME="cravyn_db"
 
 # For custom domain (optional)
-export DOMAIN="your-custom-domain.com"
+export DOMAIN="https://www.cravyn.food"
 
 # Instructions:
 # 1. Copy this file to .env
