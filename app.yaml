@@ -1,8 +1,0 @@
-runtime: nodejs20 # Specify your application's runtime (e.g., python311, go121)
-
-instance_class: F1 # The most basic instance class, good for starting out
-
-# This command starts your application.
-# It should match the "start" script in your package.json for Node.js,
-# or how you would run your app from the command line.
-entrypoint: npm start
