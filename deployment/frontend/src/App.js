@@ -416,7 +416,7 @@ function App() {
               <div className="bg-white rounded-xl shadow-lg p-6">
                 <h3 className="text-xl font-semibold text-gray-800 mb-4">📚 Recent Recipes</h3>
                 <div className="space-y-3">
-                  {recentRecipes.slice(0, 5).map((recipe, index) => (
+                  {(Array.isArray(recentRecipes) ? recentRecipes : []).slice(0, 5).map((recipe, index) => (
                     <button
                       key={index}
                       onClick={() => setCurrentRecipe(recipe)}
