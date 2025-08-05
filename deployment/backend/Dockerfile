@@ -27,6 +27,7 @@ USER cravyn
 
 # Expose port
 EXPOSE 8001
+EXPOSE 8080
 
 # Health check
 HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
