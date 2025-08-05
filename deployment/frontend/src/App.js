@@ -202,7 +202,7 @@ function App() {
                 
                 {showIngredientDropdown && customIngredient && (
                   <div className="absolute z-10 w-full bg-white border border-gray-300 rounded-lg mt-1 max-h-40 overflow-y-auto shadow-lg">
-                    {filteredIngredients.slice(0, 6).map((ingredient, index) => (
+                    {(Array.isArray(filteredIngredients) ? filteredIngredients : []) .slice(0, 6) .map((ingredient, index) => (
                       <button
                         key={index}
                         onClick={() => addIngredient(ingredient)}
