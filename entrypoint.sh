@@ -1,14 +1,15 @@
 #!/bin/sh
 set -e
 
-# Start the FastAPI backend
+# Substitute ${PORT} in nginx.conf with the Cloud Run port, write result to temp config
+envsubst '$PORT' < /etc/nginx/nginx.conf > /etc/nginx/nginx.conf.rendered
+
+# Start FastAPI backend on port 8001 (not PORT, this is internal)
 cd /backend || { echo "Backend directory not found"; exit 1; }
-
 echo "Starting FastAPI backend"
-# Start Uvicorn with proper host binding
 uvicorn server:app --host 0.0.0.0 --port 8001 &
-BACKEND_PID=$!
 
+BACKEND_PID=$!
 echo "Waiting for backend to start..."
 sleep 30
 
@@ -17,9 +18,8 @@ if ! kill -0 $BACKEND_PID 2>/dev/null; then
     exit 1
 fi
 
-# Start Nginx
-nginx -g 'daemon off;' &
-NGINX_PID=$!
+# Start Nginx with the dynamically rendered config
+nginx -c /etc/nginx/nginx.conf.rendered -g 'daemon off;'
 
 # Handle termination signals
 trap 'kill $BACKEND_PID $NGINX_PID; exit 0' SIGTERM SIGINT

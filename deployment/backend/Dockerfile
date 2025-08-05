@@ -29,6 +29,14 @@ USER cravyn
 EXPOSE 8001
 EXPOSE 8080
 
+# Copy Nginx configuration and entrypoint script
+COPY nginx.conf /etc/nginx/nginx.conf
+COPY entrypoint.sh /entrypoint.sh
+
+# Run entrypoint.sh
+RUN chmod +x /entrypoint.sh
+CMD ["/entrypoint.sh"]
+
 # Health check
 HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
     CMD curl -f http://localhost:8001/api/ || exit 1
