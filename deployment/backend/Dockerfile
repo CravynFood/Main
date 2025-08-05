@@ -26,7 +26,6 @@ RUN useradd -m -u 1000 cravyn && chown -R cravyn:cravyn /app
 USER cravyn
 
 # Expose port
-EXPOSE 8001
 EXPOSE 8080
 
 # Copy Nginx configuration and entrypoint script
