@@ -42,14 +42,15 @@ function App() {
     fetchRecentRecipes();
   }, []);
 
-  const fetchRecentRecipes = async () => {
-    try {
-      const response = await axios.get(`${API}/recipes?limit=10`);
-      setRecentRecipes(response.data);
-    } catch (e) {
-      console.error("Failed to fetch recent recipes", e);
-    }
-  };
+const fetchRecentRecipes = async () => {
+  try {
+    const response = await axios.get(`${API}/recipes?limit=10`);
+    setRecentRecipes(Array.isArray(response.data) ? response.data : []);
+  } catch (e) {
+    console.error("Failed to fetch recent recipes", e);
+    setRecentRecipes([]); // fallback to empty array on error
+  }
+};
 
   const addIngredient = (ingredient) => {
     if (ingredient && !selectedIngredients.includes(ingredient)) {
