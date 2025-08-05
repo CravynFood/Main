@@ -38,6 +38,15 @@ function App() {
   const [isGeneratingImage, setIsGeneratingImage] = useState(false);
   const [showIngredientDropdown, setShowIngredientDropdown] = useState(false);
   const [historicalIngredients, setHistoricalIngredients] = useState([]);
+  
+  console.log(
+  "filteredIngredients:", filteredIngredients, Array.isArray(filteredIngredients),
+  "\nhistoricalIngredients:", historicalIngredients, Array.isArray(historicalIngredients),
+  "\ncurrentRecipe:", currentRecipe,
+  "\ncurrentRecipe.ingredients:", currentRecipe && currentRecipe.ingredients, Array.isArray(currentRecipe && currentRecipe.ingredients),
+  "\ncurrentRecipe.instructions:", currentRecipe && currentRecipe.instructions, Array.isArray(currentRecipe && currentRecipe.instructions),
+  "\nrecentRecipes:", recentRecipes, Array.isArray(recentRecipes)
+  );
 
   useEffect(() => {
     fetchRecentRecipes();
